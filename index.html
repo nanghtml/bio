@@ -11,73 +11,65 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Animated Gradient Background */
         body {
             font-family: 'Kantumruy Pro', sans-serif;
-            background: linear-gradient(-45deg, #4158D0, #C850C0, #FFCC70, #00DBDE);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #ffffff;
-            min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            /* Khmer Style Background: Angkor Wat with Dark Overlay */
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(0, 0, 0, 0.95)), 
+                        url('https://images.unsplash.com/photo-1544413660-299165566b1d?auto=format&fit=crop&w=2000&q=80') center/cover fixed no-repeat;
+            min-height: 100vh;
+            color: white;
         }
 
         /* Ultimate Glassmorphism Effect */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         /* Floating Animation */
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-6px); }
             100% { transform: translateY(0px); }
         }
         .animate-float {
             animation: float 4s ease-in-out infinite;
         }
 
-        /* Profile Glow */
+        /* Profile Glow - Khmer Colors (Red, Blue, Gold) */
         .profile-glow {
             position: relative;
         }
         .profile-glow::before {
             content: "";
             position: absolute;
-            inset: -5px;
-            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc);
+            inset: -3px; 
+            background: linear-gradient(45deg, #ef4444, #3b82f6, #f59e0b);
             border-radius: 50%;
             z-index: -1;
-            filter: blur(15px);
+            filter: blur(12px);
             opacity: 0.8;
-            animation: spin 4s linear infinite;
+            animation: spin 6s linear infinite;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
@@ -86,15 +78,15 @@
 
         /* Social Buttons */
         .social-glass {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
         .social-glass:hover {
-            transform: translateY(-5px) scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+            transform: translateY(-4px) scale(1.08);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); /* Slight gold shadow */
         }
 
         /* Gradient Buttons */
@@ -108,9 +100,8 @@
             overflow: hidden;
         }
         .btn-action:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             filter: brightness(1.1);
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
         }
         .btn-action::after {
             content: '';
@@ -124,108 +115,108 @@
 
     </style>
 </head>
-<body class="flex items-center justify-center p-4">
+<body class="flex items-center justify-center p-3 sm:p-4">
 
-    <!-- Main Container Container -->
-    <div class="glass-panel w-full max-w-md rounded-[2.5rem] p-6 sm:p-8 my-6 relative z-10">
+    <!-- Main Container Container (Compact Size) -->
+    <div class="glass-panel w-full max-w-[380px] rounded-[2rem] p-5 sm:p-6 my-4 relative z-10">
         
         <!-- Profile Section -->
         <div class="flex flex-col items-center text-center animate-float">
-            <!-- Profile Avatar with Glowing Border -->
-            <div class="profile-glow w-32 h-32 rounded-full mb-5">
+            <!-- Profile Avatar -->
+            <div class="profile-glow w-24 h-24 rounded-full mb-3.5">
                 <img src="https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/profile.jpg" alt="Hun Samnang" 
-                     class="w-full h-full object-cover rounded-full border-[3px] border-white shadow-2xl relative z-10"
+                     class="w-full h-full object-cover rounded-full border-[2.5px] border-white shadow-xl relative z-10"
                      onerror="this.src='https://ui-avatars.com/api/?name=Hun+Samnang&background=0D8ABC&color=fff&size=128'">
-                <!-- Verified Tick floating on profile -->
-                <div class="absolute bottom-1 right-1 z-20 bg-blue-500 rounded-full p-1 border-2 border-white flex items-center justify-center w-8 h-8 shadow-lg">
-                    <i class="fas fa-check text-white text-sm"></i>
+                <!-- Verified Tick -->
+                <div class="absolute bottom-0 right-0 z-20 bg-blue-500 rounded-full p-1 border-2 border-white flex items-center justify-center w-6 h-6 shadow-md">
+                    <i class="fas fa-check text-white text-[10px]"></i>
                 </div>
             </div>
             
-            <h1 class="text-3xl font-bold text-white tracking-wide drop-shadow-md">ហ៊ុន សំណាង</h1>
-            <p class="text-white/80 font-medium mt-1 tracking-wider text-sm uppercase">Hun Samnang</p>
+            <h1 class="text-2xl font-bold text-white tracking-wide drop-shadow-md">ហ៊ុន សំណាង</h1>
+            <p class="text-amber-400 font-medium mt-0.5 tracking-wider text-xs uppercase drop-shadow-md">Hun Samnang</p>
         </div>
 
-        <!-- Social Media Icons (Glass Style) -->
-        <div class="flex justify-center gap-4 mt-8 mb-8">
-            <a href="https://www.facebook.com/samnanghunreal/" target="_blank" class="social-glass w-12 h-12 rounded-full flex items-center justify-center text-xl text-white">
+        <!-- Social Media Icons -->
+        <div class="flex justify-center gap-3 mt-5 mb-5">
+            <a href="https://www.facebook.com/samnanghunreal/" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://t.me/hunsamnang" target="_blank" class="social-glass w-12 h-12 rounded-full flex items-center justify-center text-xl text-white">
+            <a href="https://t.me/hunsamnang" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
                 <i class="fab fa-telegram-plane"></i>
             </a>
-            <a href="https://wa.me/qr/H35HQISESRRLB1" target="_blank" class="social-glass w-12 h-12 rounded-full flex items-center justify-center text-xl text-white">
+            <a href="https://wa.me/qr/H35HQISESRRLB1" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://u.wechat.com/kBVl6zaWxOSCqiHsDatJx7A?s=2" target="_blank" class="social-glass w-12 h-12 rounded-full flex items-center justify-center text-xl text-white">
+            <a href="https://u.wechat.com/kBVl6zaWxOSCqiHsDatJx7A?s=2" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
                 <i class="fab fa-weixin"></i>
             </a>
         </div>
 
-        <div class="w-full h-px bg-white/20 mb-6 rounded-full"></div>
+        <div class="w-full h-px bg-white/20 mb-4 rounded-full"></div>
 
         <!-- Payment Section -->
-        <div class="space-y-4">
-            <h2 class="text-sm font-bold text-white/90 uppercase tracking-widest flex items-center gap-2 mb-4 drop-shadow-sm">
-                <i class="fas fa-wallet text-yellow-300"></i> វិធីសាស្រ្តទូទាត់ប្រាក់
+        <div class="space-y-3">
+            <h2 class="text-[13px] font-bold text-white/90 uppercase tracking-widest flex items-center gap-2 mb-3 drop-shadow-sm">
+                <i class="fas fa-wallet text-amber-400"></i> វិធីសាស្រ្តទូទាត់ប្រាក់
             </h2>
             
             <!-- ABA Bank -->
-            <div class="glass-card rounded-[1.5rem] p-4 flex flex-col gap-4 group">
-                <div class="flex items-center gap-3">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScTSiO0sgilmoq82Yce4JRG7prnLsc3XDq-nPwZDT1Zw&s=10" alt="ABA Bank" class="w-12 h-12 rounded-xl object-cover border border-white/30 shadow-md">
+            <div class="glass-card rounded-[1.25rem] p-3 flex flex-col gap-3 group">
+                <div class="flex items-center gap-2.5">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScTSiO0sgilmoq82Yce4JRG7prnLsc3XDq-nPwZDT1Zw&s=10" alt="ABA Bank" class="w-10 h-10 rounded-lg object-cover border border-white/20 shadow-sm">
                     <div>
-                        <h3 class="font-bold text-white text-lg">ABA Bank</h3>
-                        <p class="text-xs text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
+                        <h3 class="font-bold text-white text-base">ABA Bank</h3>
+                        <p class="text-[11px] text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
                     </div>
                 </div>
-                <div class="flex gap-3">
-                    <a href="https://pay.ababank.com/oRF8/bjr6yndk" target="_blank" class="btn-action btn-gradient-aba flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-white border border-white/20">
+                <div class="flex gap-2">
+                    <a href="https://pay.ababank.com/oRF8/bjr6yndk" target="_blank" class="btn-action btn-gradient-aba flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white shadow-sm border border-white/10">
                         <i class="fas fa-link"></i> បង់តាម Link
                     </a>
-                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/aba.jpg', 'ABA Bank')" class="btn-action glass-card flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-white">
+                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/aba.jpg', 'ABA Bank')" class="btn-action glass-card flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white">
                         <i class="fas fa-qrcode"></i> ស្កេន QR
                     </button>
                 </div>
             </div>
 
             <!-- ACLEDA Bank -->
-            <div class="glass-card rounded-[1.5rem] p-4 flex flex-col gap-4 group">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center p-0.5 border border-white/30 shadow-md">
-                        <img src="https://cccbic.org/businesses/430-logo.jpg" alt="ACLEDA Bank" class="w-full h-full object-contain rounded-lg">
+            <div class="glass-card rounded-[1.25rem] p-3 flex flex-col gap-3 group">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-0.5 border border-white/20 shadow-sm">
+                        <img src="https://cccbic.org/businesses/430-logo.jpg" alt="ACLEDA Bank" class="w-full h-full object-contain rounded-md">
                     </div>
                     <div>
-                        <h3 class="font-bold text-white text-lg">ACLEDA Bank</h3>
-                        <p class="text-xs text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
+                        <h3 class="font-bold text-white text-base">ACLEDA Bank</h3>
+                        <p class="text-[11px] text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
                     </div>
                 </div>
-                <div class="flex gap-3">
-                    <a href="https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu5ckLzMHjaSki6Ru0bsOyNK+ylPBgZ0sHH6BeGUscKoEran8y74FGrnSdiKqbAxfzV71sxWKK0pKj/RYS1lETFwk5f6KW2DN1hgb4duxAou4S553piaPpwzqZKuhkKyotwROYt/tmB/XpmB/w3GEriOBxyJcvzjfsguYDI3DQXMlxwEd8oFPWX+nJpSwPRJyJ627h7JIz+AnP/gOunDWsZbuQ/1BcMwOAF9pYgWqTkiDFqzVU696ew2/no7+R8OMmw==&key=khqr" target="_blank" class="btn-action btn-gradient-ac flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-white border border-white/20">
+                <div class="flex gap-2">
+                    <a href="https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu5ckLzMHjaSki6Ru0bsOyNK+ylPBgZ0sHH6BeGUscKoEran8y74FGrnSdiKqbAxfzV71sxWKK0pKj/RYS1lETFwk5f6KW2DN1hgb4duxAou4S553piaPpwzqZKuhkKyotwROYt/tmB/XpmB/w3GEriOBxyJcvzjfsguYDI3DQXMlxwEd8oFPWX+nJpSwPRJyJ627h7JIz+AnP/gOunDWsZbuQ/1BcMwOAF9pYgWqTkiDFqzVU696ew2/no7+R8OMmw==&key=khqr" target="_blank" class="btn-action btn-gradient-ac flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white shadow-sm border border-white/10">
                         <i class="fas fa-link"></i> បង់តាម Link
                     </a>
-                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/ac.jpg', 'ACLEDA Bank')" class="btn-action glass-card flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-white">
+                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/ac.jpg', 'ACLEDA Bank')" class="btn-action glass-card flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white">
                         <i class="fas fa-qrcode"></i> ស្កេន QR
                     </button>
                 </div>
             </div>
 
             <!-- Wing Bank -->
-            <div class="glass-card rounded-[1.5rem] p-4 flex flex-col gap-4 group">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden border border-white/30 shadow-md bg-white">
+            <div class="glass-card rounded-[1.25rem] p-3 flex flex-col gap-3 group">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden border border-white/20 shadow-sm bg-white">
                         <img src="https://play-lh.googleusercontent.com/A8bangMCdTPS1Xa9hbuc4pcXxUspKpJhDHWW3QSw3OB-VMtUv6NCnqAd7pUv2C-2OnjJHn0Xmv1cs6c2hFUZMw" alt="Wing Bank" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <h3 class="font-bold text-white text-lg">Wing Bank</h3>
-                        <p class="text-xs text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
+                        <h3 class="font-bold text-white text-base">Wing Bank</h3>
+                        <p class="text-[11px] text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
                     </div>
                 </div>
-                <div class="flex gap-3">
-                    <a href="https://wingmoney.app.link/FenLETPGC0b" target="_blank" class="btn-action btn-gradient-wing flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 border border-white/20 text-gray-900">
+                <div class="flex gap-2">
+                    <a href="https://wingmoney.app.link/FenLETPGC0b" target="_blank" class="btn-action btn-gradient-wing flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-gray-900 shadow-sm border border-white/10">
                         <i class="fas fa-link"></i> បង់តាម Link
                     </a>
-                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/wing.jpg', 'Wing Bank')" class="btn-action glass-card flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-white">
+                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/wing.jpg', 'Wing Bank')" class="btn-action glass-card flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white">
                         <i class="fas fa-qrcode"></i> ស្កេន QR
                     </button>
                 </div>
@@ -234,45 +225,43 @@
         </div>
         
         <!-- Footer -->
-        <div class="mt-8 text-center text-xs font-medium text-white/50">
+        <div class="mt-6 text-center text-[11px] font-medium text-white/50">
             <p>&copy; <script>document.write(new Date().getFullYear())</script> Hun Samnang. All rights reserved.</p>
         </div>
     </div>
 
-    <!-- QR Code Modal (Glassmorphism Style) -->
+    <!-- QR Code Modal -->
     <div id="qrModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <!-- Blur Backdrop -->
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity opacity-0 duration-300" id="qrBackdrop" onclick="closeQR()"></div>
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity opacity-0 duration-300" id="qrBackdrop" onclick="closeQR()"></div>
         
-        <!-- Modal Content -->
-        <div class="glass-panel w-full max-w-sm rounded-[2rem] overflow-hidden shadow-2xl relative z-10 transform scale-90 opacity-0 transition-all duration-300 border border-white/40" id="qrModalContent">
+        <div class="glass-panel w-full max-w-[320px] rounded-[1.5rem] overflow-hidden shadow-2xl relative z-10 transform scale-90 opacity-0 transition-all duration-300" id="qrModalContent">
             
-            <div class="p-4 flex justify-between items-center border-b border-white/10">
-                <h3 id="qrTitle" class="font-bold text-lg text-white ml-2 flex items-center gap-2">
-                    <i class="fas fa-qrcode text-yellow-300"></i> QR Code
+            <div class="p-3 flex justify-between items-center border-b border-white/10">
+                <h3 id="qrTitle" class="font-bold text-base text-white ml-2 flex items-center gap-2">
+                    <i class="fas fa-qrcode text-amber-400"></i> QR Code
                 </h3>
-                <button onclick="closeQR()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-red-500 hover:text-white transition-all duration-300">
-                    <i class="fas fa-times"></i>
+                <button onclick="closeQR()" class="w-7 h-7 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-red-500 hover:text-white transition-all duration-300">
+                    <i class="fas fa-times text-sm"></i>
                 </button>
             </div>
             
-            <div class="p-6 flex justify-center relative">
-                <div class="relative w-full aspect-square max-w-[260px] bg-white rounded-2xl p-2 shadow-inner border border-white/50 flex items-center justify-center overflow-hidden">
+            <div class="p-4 flex justify-center relative">
+                <div class="relative w-full aspect-square max-w-[220px] bg-white rounded-xl p-2 shadow-inner border border-white/50 flex items-center justify-center overflow-hidden">
                     
                     <div id="qrLoading" class="absolute inset-0 flex flex-col items-center justify-center text-blue-500 bg-white/80 backdrop-blur-sm z-20">
-                        <i class="fas fa-circle-notch fa-spin text-4xl mb-2"></i>
-                        <span class="text-xs font-medium text-gray-600">កំពុងទាញយក...</span>
+                        <i class="fas fa-circle-notch fa-spin text-3xl mb-2"></i>
+                        <span class="text-[11px] font-medium text-gray-600">កំពុងទាញយក...</span>
                     </div>
                     
-                    <img id="qrImage" src="" alt="QR Code" class="w-full h-full object-contain rounded-xl relative z-10" onload="document.getElementById('qrLoading').style.display='none'">
+                    <img id="qrImage" src="" alt="QR Code" class="w-full h-full object-contain rounded-lg relative z-10" onload="document.getElementById('qrLoading').style.display='none'">
                 </div>
             </div>
             
-            <div class="p-4 text-center bg-black/10">
-                <p class="font-medium text-white/90 text-sm">សូមស្កេនដើម្បីធ្វើការទូទាត់ប្រាក់</p>
+            <div class="p-3 text-center bg-black/20">
+                <p class="font-medium text-white/90 text-xs">សូមស្កេនដើម្បីធ្វើការទូទាត់ប្រាក់</p>
                 <div class="flex items-center justify-center gap-2 mt-2">
-                    <span class="text-[10px] font-bold bg-white/20 text-white border border-white/30 px-3 py-1 rounded-full uppercase">USD</span>
-                    <span class="text-[10px] font-bold bg-white/20 text-white border border-white/30 px-3 py-1 rounded-full uppercase">KHR</span>
+                    <span class="text-[9px] font-bold bg-white/20 text-white border border-white/30 px-2.5 py-0.5 rounded-full uppercase">USD</span>
+                    <span class="text-[9px] font-bold bg-white/20 text-white border border-white/30 px-2.5 py-0.5 rounded-full uppercase">KHR</span>
                 </div>
             </div>
         </div>
@@ -289,7 +278,7 @@
             
             modal.classList.remove('hidden');
             
-            title.innerHTML = `<i class="fas fa-qrcode text-yellow-300 mr-2"></i> ${bankName}`;
+            title.innerHTML = `<i class="fas fa-qrcode text-amber-400 mr-2"></i> ${bankName}`;
             loading.style.display = 'flex';
             img.src = imgSrc;
             
