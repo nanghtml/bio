@@ -245,30 +245,46 @@
                 </button>
             </div>
             
-            <div class="p-4 flex justify-center relative">
+            <div class="p-4 flex justify-center relative bg-white/5">
                 <div class="relative w-full aspect-square max-w-[220px] bg-white rounded-xl p-2 shadow-inner border border-white/50 flex items-center justify-center overflow-hidden">
                     
                     <div id="qrLoading" class="absolute inset-0 flex flex-col items-center justify-center text-blue-500 bg-white/80 backdrop-blur-sm z-20">
                         <i class="fas fa-circle-notch fa-spin text-3xl mb-2"></i>
-                        <span class="text-[11px] font-medium text-gray-600">កំពុងទាញយក...</span>
+                        <span class="text-[11px] font-medium text-gray-600 mt-2">កំពុងទាញយក...</span>
                     </div>
                     
                     <img id="qrImage" src="" alt="QR Code" class="w-full h-full object-contain rounded-lg relative z-10" onload="document.getElementById('qrLoading').style.display='none'">
                 </div>
             </div>
             
-            <div class="p-3 text-center bg-black/20">
-                <p class="font-medium text-white/90 text-xs">សូមស្កេនដើម្បីធ្វើការទូទាត់ប្រាក់</p>
-                <div class="flex items-center justify-center gap-2 mt-2">
-                    <span class="text-[9px] font-bold bg-white/20 text-white border border-white/30 px-2.5 py-0.5 rounded-full uppercase">USD</span>
-                    <span class="text-[9px] font-bold bg-white/20 text-white border border-white/30 px-2.5 py-0.5 rounded-full uppercase">KHR</span>
+            <!-- Share & Download Section -->
+            <div class="p-4 text-center bg-black/30 flex flex-col gap-3">
+                <div class="flex items-center justify-center gap-2">
+                    <span class="text-[10px] font-bold bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full uppercase tracking-wider">USD</span>
+                    <span class="text-[10px] font-bold bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full uppercase tracking-wider">KHR</span>
+                </div>
+                
+                <div class="flex items-center justify-center gap-2 mt-1">
+                    <button id="shareBtn" onclick="shareQR()" class="flex-1 bg-blue-500/90 hover:bg-blue-500 text-white text-[13px] font-medium py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg border border-blue-400/50">
+                        <i class="fas fa-share-nodes"></i> ចែករំលែក
+                    </button>
+                    <button id="downloadBtn" onclick="downloadQR()" class="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[13px] font-medium py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg">
+                        <i class="fas fa-download"></i> ទាញយក
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Store current QR details globally for Share/Download actions
+        let currentQRSrc = '';
+        let currentBankName = '';
+
         function openQR(imgSrc, bankName) {
+            currentQRSrc = imgSrc;
+            currentBankName = bankName;
+            
             const modal = document.getElementById('qrModal');
             const backdrop = document.getElementById('qrBackdrop');
             const modalContent = document.getElementById('qrModalContent');
@@ -304,6 +320,81 @@
                 modal.classList.add('hidden');
                 document.getElementById('qrImage').src = "";
             }, 300);
+        }
+
+        // Function to Share QR Code
+        async function shareQR() {
+            if (!currentQRSrc) return;
+            
+            const shareBtn = document.getElementById('shareBtn');
+            const originalHTML = shareBtn.innerHTML;
+            
+            try {
+                // Show loading state
+                shareBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> កំពុងរៀបចំ...';
+                
+                // Fetch image and convert to File object
+                const response = await fetch(currentQRSrc);
+                const blob = await response.blob();
+                const fileName = `${currentBankName.replace(/\s+/g, '_')}_QR.jpg`;
+                const file = new File([blob], fileName, { type: blob.type });
+
+                // Check if browser supports Web Share API with Files
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        title: `QR Code សម្រាប់ទូទាត់ - ${currentBankName}`,
+                        text: `សូមស្កេន QR Code នេះដើម្បីធ្វើការទូទាត់ប្រាក់ចូលគណនី ${currentBankName} របស់ខ្ញុំបាទ ហ៊ុន សំណាង។`,
+                        files: [file]
+                    });
+                } else if (navigator.share) {
+                    // Fallback: Share just the URL and Text if file sharing isn't supported
+                    await navigator.share({
+                        title: `QR Code សម្រាប់ទូទាត់ - ${currentBankName}`,
+                        text: `សូមស្កេន QR Code នេះដើម្បីធ្វើការទូទាត់ប្រាក់ចូលគណនី ${currentBankName} របស់ខ្ញុំបាទ ហ៊ុន សំណាង។`,
+                        url: currentQRSrc
+                    });
+                } else {
+                    alert('សុំទោស កម្មវិធីរុករករបស់អ្នកមិនគាំទ្រមុខងារចែករំលែកនេះទេ។ អ្នកអាចប្រើប៊ូតុង "ទាញយក" ជំនួសវិញ។');
+                }
+            } catch (error) {
+                console.log('ការចែករំលែកត្រូវបានបោះបង់ ឬមានបញ្ហា:', error);
+            } finally {
+                // Restore button state
+                shareBtn.innerHTML = originalHTML;
+            }
+        }
+
+        // Function to Download QR Code
+        async function downloadQR() {
+            if (!currentQRSrc) return;
+            
+            const downloadBtn = document.getElementById('downloadBtn');
+            const originalHTML = downloadBtn.innerHTML;
+            
+            try {
+                downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> កំពុងទាញយក...';
+                
+                const response = await fetch(currentQRSrc);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `HunSamnang_${currentBankName.replace(/\s+/g, '_')}_QR.jpg`;
+                
+                document.body.appendChild(a);
+                a.click();
+                
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            } catch (error) {
+                console.error('បញ្ហាក្នុងការទាញយក:', error);
+                // Fallback for direct download link
+                window.open(currentQRSrc, '_blank');
+            } finally {
+                downloadBtn.innerHTML = originalHTML;
+            }
         }
     </script>
 </body>
