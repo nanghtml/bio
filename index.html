@@ -1,399 +1,428 @@
+```html
 <!DOCTYPE html>
 <html lang="km">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hun Samnang - Profile & Payments</title>
-    <!-- Tailwind CSS -->
+    <title>ប្រវត្តិរូបផ្ទាល់ខ្លួន - Hun Samnang</title>
+    <!-- Tailwind CSS សម្រាប់រចនាប័ទ្ម -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
+    <!-- FontAwesome សម្រាប់រូបតំណាង (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ពុម្ពអក្សរខ្មែរ */
+        @import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&display=swap');
         body {
-            font-family: 'Kantumruy Pro', sans-serif;
+            font-family: 'Battambang', sans-serif;
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: #f8fafc;
             overflow-x: hidden;
-            /* Khmer Style Background: Angkor Wat with Dark Overlay */
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(0, 0, 0, 0.95)), 
-                        url('https://images.unsplash.com/photo-1544413660-299165566b1d?auto=format&fit=crop&w=2000&q=80') center/cover fixed no-repeat;
-            min-height: 100vh;
-            color: white;
         }
-
-        /* Ultimate Glassmorphism Effect */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Floating Animation */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* Profile Glow - Khmer Colors (Red, Blue, Gold) */
-        .profile-glow {
-            position: relative;
-        }
-        .profile-glow::before {
-            content: "";
-            position: absolute;
-            inset: -3px; 
-            background: linear-gradient(45deg, #ef4444, #3b82f6, #f59e0b);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(12px);
-            opacity: 0.8;
-            animation: spin 6s linear infinite;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { display: none; }
-
-        /* Social Buttons */
-        .social-glass {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-        .social-glass:hover {
-            transform: translateY(-4px) scale(1.08);
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); /* Slight gold shadow */
-        }
-
-        /* Gradient Buttons */
-        .btn-gradient-aba { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
-        .btn-gradient-ac { background: linear-gradient(135deg, #141e30 0%, #243b55 100%); }
-        .btn-gradient-wing { background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%); color: #000; }
         
-        .btn-action {
-            transition: all 0.3s ease;
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
             position: relative;
+            z-index: 10;
+        }
+
+        /* --------------------------------------
+           Animation ភ្លើងរត់ (Animated Border)
+        ----------------------------------------- */
+        
+        /* កាតធនាគារ (Card Border Animation) */
+        .animated-border-box {
+            position: relative;
+            border-radius: 1rem; /* 16px */
+            padding: 2px; /* កម្រាស់នៃបន្ទាត់ភ្លើង */
             overflow: hidden;
         }
-        .btn-action:hover {
-            transform: scale(1.03);
-            filter: brightness(1.1);
-        }
-        .btn-action::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.3), rgba(255,255,255,0));
-            transform: skewX(-25deg);
-            transition: all 0.75s ease;
-        }
-        .btn-action:hover::after { left: 200%; }
 
+        .animated-border-box::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            /* ពណ៌ភ្លើងរត់ (ប្រើ Gradient) */
+            background: conic-gradient(
+                transparent, 
+                transparent, 
+                transparent, 
+                #3b82f6, /* Blue 500 */
+                #10b981, /* Emerald 500 */
+                #3b82f6
+            );
+            animation: rotate 4s linear infinite;
+            z-index: 1;
+        }
+
+        .animated-border-box::after {
+            content: "";
+            position: absolute;
+            inset: 2px; /* ត្រូវតែស្មើនឹង padding ខាងលើ ដើម្បីបិទបាំងកណ្តាល */
+            background: #1e293b; /* ពណ៌ផ្ទៃខាងក្នុងនៃកាត */
+            border-radius: calc(1rem - 2px);
+            z-index: 2;
+        }
+        
+        /* ខ្លឹមសារខាងក្នុងកាតត្រូវនៅពីលើ (z-index ខ្ពស់ជាង) */
+        .card-content {
+            position: relative;
+            z-index: 10;
+            background: transparent;
+            padding: 1rem;
+            border-radius: calc(1rem - 2px);
+        }
+
+        /* រូប Profile (Avatar Border Animation) */
+        .avatar-border-box {
+            position: relative;
+            padding: 4px; /* កម្រាស់ភ្លើងរត់ជុំវិញរូប */
+            border-radius: 50%;
+            display: inline-block;
+            overflow: hidden;
+        }
+        
+        .avatar-border-box::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                #ec4899, /* Pink 500 */
+                #8b5cf6, /* Violet 500 */
+                #3b82f6, /* Blue 500 */
+                #ec4899
+            );
+            animation: rotate 3s linear infinite;
+            z-index: 1;
+        }
+
+        .avatar-img-container {
+            position: relative;
+            z-index: 10;
+            border-radius: 50%;
+            background-color: #0f172a;
+            padding: 4px; /* គម្លាតរវាងរូបនិងភ្លើង */
+        }
+
+        /* ចលនាបង្វិល (Rotation Animation) */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* -------------------------------------- */
+
+        .hover-scale {
+            transition: transform 0.2s ease-in-out;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        /* លាក់ Scrollbar តែនៅអាចអូសបាន */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center p-3 sm:p-4">
+<body class="min-h-screen flex justify-center p-4 sm:p-8">
 
-    <!-- Main Container Container (Compact Size) -->
-    <div class="glass-panel w-full max-w-[380px] rounded-[2rem] p-5 sm:p-6 my-4 relative z-10">
+    <div class="w-full max-w-md space-y-8 pb-10">
         
-        <!-- Profile Section -->
-        <div class="flex flex-col items-center text-center animate-float">
-            <!-- Profile Avatar -->
-            <div class="profile-glow w-24 h-24 rounded-full mb-3.5">
-                <img src="https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/profile.jpg" alt="Hun Samnang" 
-                     class="w-full h-full object-cover rounded-full border-[2.5px] border-white shadow-xl relative z-10"
-                     onerror="this.src='https://ui-avatars.com/api/?name=Hun+Samnang&background=0D8ABC&color=fff&size=128'">
-                <!-- Verified Tick -->
-                <div class="absolute bottom-0 right-0 z-20 bg-blue-500 rounded-full p-1 border-2 border-white flex items-center justify-center w-6 h-6 shadow-md">
-                    <i class="fas fa-check text-white text-[10px]"></i>
+        <!-- ផ្នែកប្រវត្តិរូប (Profile Section) -->
+        <div class="text-center space-y-4 pt-8">
+            <div class="relative inline-block">
+                <!-- ប្រើ Animation ភ្លើងរត់ជុំវិញរូប Profile -->
+                <div class="avatar-border-box hover-scale">
+                    <div class="avatar-img-container">
+                        <img src="https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/profile.jpg" 
+                             alt="Profile Picture" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Hun+Samnang&background=random'"
+                             class="w-32 h-32 rounded-full object-cover">
+                    </div>
                 </div>
+                <div class="absolute bottom-2 right-2 bg-green-500 w-5 h-5 rounded-full border-2 border-slate-800 z-20"></div>
             </div>
-            
-            <h1 class="text-2xl font-bold text-white tracking-wide drop-shadow-md">ហ៊ុន សំណាង</h1>
-            <p class="text-amber-400 font-medium mt-0.5 tracking-wider text-xs uppercase drop-shadow-md">Hun Samnang</p>
+            <h1 class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Hun Samnang</h1>
+            <p class="text-slate-400 text-sm">ទំនាក់ទំនង និង វិធីសាស្ត្រទូទាត់ប្រាក់</p>
         </div>
 
-        <!-- Social Media Icons -->
-        <div class="flex justify-center gap-3 mt-5 mb-5">
-            <a href="https://www.facebook.com/samnanghunreal/" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
+        <!-- បណ្តាញសង្គម (Social Links) -->
+        <div class="flex justify-center gap-4 relative z-20">
+            <a href="https://www.facebook.com/samnanghunreal/" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-500 text-xl hover:bg-blue-600 hover:text-white transition-colors hover-scale shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://t.me/hunsamnang" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
+            <a href="https://t.me/hunsamnang" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 text-xl hover:bg-sky-500 hover:text-white transition-colors hover-scale shadow-[0_0_15px_rgba(56,189,248,0.3)]">
                 <i class="fab fa-telegram-plane"></i>
             </a>
-            <a href="https://wa.me/qr/H35HQISESRRLB1" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
+            <a href="https://wa.me/qr/H35HQISESRRLB1" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-green-500 text-xl hover:bg-green-500 hover:text-white transition-colors hover-scale shadow-[0_0_15px_rgba(34,197,94,0.3)]">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://u.wechat.com/kBVl6zaWxOSCqiHsDatJx7A?s=2" target="_blank" class="social-glass w-10 h-10 rounded-full flex items-center justify-center text-lg text-white">
+            <a href="https://u.wechat.com/kBVl6zaWxOSCqiHsDatJx7A?s=2" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-green-400 text-xl hover:bg-green-400 hover:text-white transition-colors hover-scale shadow-[0_0_15px_rgba(74,222,128,0.3)]">
                 <i class="fab fa-weixin"></i>
             </a>
         </div>
 
-        <div class="w-full h-px bg-white/20 mb-4 rounded-full"></div>
+        <!-- ផ្នែកធនាគារ (Banking/Payment Section) -->
+        <div class="space-y-5">
+            <h2 class="text-lg font-semibold border-b border-slate-700 pb-2 mb-4 text-center">គណនីធនាគារ (ផ្ទេរប្រាក់)</h2>
 
-        <!-- Payment Section -->
-        <div class="space-y-3">
-            <h2 class="text-[13px] font-bold text-white/90 uppercase tracking-widest flex items-center gap-2 mb-3 drop-shadow-sm">
-                <i class="fas fa-wallet text-amber-400"></i> វិធីសាស្រ្តទូទាត់ប្រាក់
-            </h2>
-            
-            <!-- ABA Bank -->
-            <div class="glass-card rounded-[1.25rem] p-3 flex flex-col gap-3 group">
-                <div class="flex items-center gap-2.5">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScTSiO0sgilmoq82Yce4JRG7prnLsc3XDq-nPwZDT1Zw&s=10" alt="ABA Bank" class="w-10 h-10 rounded-lg object-cover border border-white/20 shadow-sm">
-                    <div>
-                        <h3 class="font-bold text-white text-base">ABA Bank</h3>
-                        <p class="text-[11px] text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
+            <!-- ABA Bank ជាមួយភ្លើងរត់ -->
+            <div class="animated-border-box">
+                <div class="card-content flex flex-col gap-3">
+                    <div class="flex items-center gap-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScTSiO0sgilmoq82Yce4JRG7prnLsc3XDq-nPwZDT1Zw&s=10" alt="ABA" class="w-12 h-12 rounded-xl object-cover bg-white">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-lg text-white">ABA Bank</h3>
+                            <p class="text-xs text-slate-300">ទាំងដុល្លា នឹង រៀល</p>
+                        </div>
                     </div>
-                </div>
-                <div class="flex gap-2">
-                    <a href="https://pay.ababank.com/oRF8/bjr6yndk" target="_blank" class="btn-action btn-gradient-aba flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white shadow-sm border border-white/10">
-                        <i class="fas fa-link"></i> បង់តាម Link
-                    </a>
-                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/aba.jpg', 'ABA Bank')" class="btn-action glass-card flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white">
-                        <i class="fas fa-qrcode"></i> ស្កេន QR
-                    </button>
+                    <div class="flex gap-2 mt-2">
+                        <a href="https://pay.ababank.com/oRF8/bjr6yndk" target="_blank" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white text-center py-2 rounded-lg text-sm font-medium transition-colors">
+                            <i class="fas fa-link mr-1"></i> តំណភ្ជាប់
+                        </a>
+                        <button onclick="openQRModal('ABA Bank', 'https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/aba.jpg')" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-center py-2 rounded-lg text-sm font-medium transition-colors">
+                            <i class="fas fa-qrcode mr-1"></i> មើល QR
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- ACLEDA Bank -->
-            <div class="glass-card rounded-[1.25rem] p-3 flex flex-col gap-3 group">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-0.5 border border-white/20 shadow-sm">
-                        <img src="https://cccbic.org/businesses/430-logo.jpg" alt="ACLEDA Bank" class="w-full h-full object-contain rounded-md">
+            <!-- ACLEDA Bank ជាមួយភ្លើងរត់ -->
+            <div class="animated-border-box">
+                <div class="card-content flex flex-col gap-3">
+                    <div class="flex items-center gap-4">
+                        <img src="https://cccbic.org/businesses/430-logo.jpg" alt="ACLEDA" class="w-12 h-12 rounded-xl object-cover bg-white">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-lg text-white">ACLEDA Bank</h3>
+                            <p class="text-xs text-slate-300">ទាំងដុល្លា នឹង រៀល</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-white text-base">ACLEDA Bank</h3>
-                        <p class="text-[11px] text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
+                    <div class="flex gap-2 mt-2">
+                        <a href="https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu5ckLzMHjaSki6Ru0bsOyNK+ylPBgZ0sHH6BeGUscKoEran8y74FGrnSdiKqbAxfzV71sxWKK0pKj/RYS1lETFwk5f6KW2DN1hgb4duxAou4S553piaPpwzqZKuhkKyotwROYt/tmB/XpmB/w3GEriOBxyJcvzjfsguYDI3DQXMlxwEd8oFPWX+nJpSwPRJyJ627h7JIz+AnP/gOunDWsZbuQ/1BcMwOAF9pYgWqTkiDFqzVU696ew2/no7+R8OMmw==&key=khqr" target="_blank" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white text-center py-2 rounded-lg text-sm font-medium transition-colors">
+                            <i class="fas fa-link mr-1"></i> តំណភ្ជាប់
+                        </a>
+                        <button onclick="openQRModal('ACLEDA Bank', 'https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/ac.jpg')" class="flex-1 bg-[#102758] hover:bg-[#1a3b85] text-white text-center py-2 rounded-lg text-sm font-medium transition-colors">
+                            <i class="fas fa-qrcode mr-1"></i> មើល QR
+                        </button>
                     </div>
-                </div>
-                <div class="flex gap-2">
-                    <a href="https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu5ckLzMHjaSki6Ru0bsOyNK+ylPBgZ0sHH6BeGUscKoEran8y74FGrnSdiKqbAxfzV71sxWKK0pKj/RYS1lETFwk5f6KW2DN1hgb4duxAou4S553piaPpwzqZKuhkKyotwROYt/tmB/XpmB/w3GEriOBxyJcvzjfsguYDI3DQXMlxwEd8oFPWX+nJpSwPRJyJ627h7JIz+AnP/gOunDWsZbuQ/1BcMwOAF9pYgWqTkiDFqzVU696ew2/no7+R8OMmw==&key=khqr" target="_blank" class="btn-action btn-gradient-ac flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white shadow-sm border border-white/10">
-                        <i class="fas fa-link"></i> បង់តាម Link
-                    </a>
-                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/ac.jpg', 'ACLEDA Bank')" class="btn-action glass-card flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white">
-                        <i class="fas fa-qrcode"></i> ស្កេន QR
-                    </button>
                 </div>
             </div>
 
-            <!-- Wing Bank -->
-            <div class="glass-card rounded-[1.25rem] p-3 flex flex-col gap-3 group">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden border border-white/20 shadow-sm bg-white">
-                        <img src="https://play-lh.googleusercontent.com/A8bangMCdTPS1Xa9hbuc4pcXxUspKpJhDHWW3QSw3OB-VMtUv6NCnqAd7pUv2C-2OnjJHn0Xmv1cs6c2hFUZMw" alt="Wing Bank" class="w-full h-full object-cover">
+            <!-- Wing Bank ជាមួយភ្លើងរត់ -->
+            <div class="animated-border-box">
+                <div class="card-content flex flex-col gap-3">
+                    <div class="flex items-center gap-4">
+                        <img src="https://play-lh.googleusercontent.com/A8bangMCdTPS1Xa9hbuc4pcXxUspKpJhDHWW3QSw3OB-VMtUv6NCnqAd7pUv2C-2OnjJHn0Xmv1cs6c2hFUZMw" alt="Wing" class="w-12 h-12 rounded-xl object-cover bg-[#a4cd39] p-1">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-lg text-white">Wing Bank</h3>
+                            <p class="text-xs text-slate-300">ទាំងដុល្លា នឹង រៀល</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-white text-base">Wing Bank</h3>
-                        <p class="text-[11px] text-white/70 mt-0.5">គណនី: ដុល្លារ និង រៀល</p>
+                    <div class="flex gap-2 mt-2">
+                        <a href="https://wingmoney.app.link/FenLETPGC0b" target="_blank" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white text-center py-2 rounded-lg text-sm font-medium transition-colors">
+                            <i class="fas fa-link mr-1"></i> តំណភ្ជាប់
+                        </a>
+                        <button onclick="openQRModal('Wing Bank', 'https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/wing.jpg')" class="flex-1 bg-[#a4cd39] hover:bg-[#b5e045] text-slate-900 text-center py-2 rounded-lg text-sm font-bold transition-colors">
+                            <i class="fas fa-qrcode mr-1"></i> មើល QR
+                        </button>
                     </div>
-                </div>
-                <div class="flex gap-2">
-                    <a href="https://wingmoney.app.link/FenLETPGC0b" target="_blank" class="btn-action btn-gradient-wing flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-gray-900 shadow-sm border border-white/10">
-                        <i class="fas fa-link"></i> បង់តាម Link
-                    </a>
-                    <button onclick="openQR('https://raw.githubusercontent.com/hunsamnang423/profile/refs/heads/main/wing.jpg', 'Wing Bank')" class="btn-action glass-card flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 text-white">
-                        <i class="fas fa-qrcode"></i> ស្កេន QR
-                    </button>
                 </div>
             </div>
 
         </div>
         
         <!-- Footer -->
-        <div class="mt-6 text-center text-[11px] font-medium text-white/50">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Hun Samnang. All rights reserved.</p>
-        </div>
+        <p class="text-center text-xs text-slate-500 mt-8 relative z-20">
+            &copy; <span id="year"></span> Hun Samnang. All rights reserved.
+        </p>
+
     </div>
 
-    <!-- QR Code Modal -->
-    <div id="qrModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity opacity-0 duration-300" id="qrBackdrop" onclick="closeQR()"></div>
-        
-        <div class="glass-panel w-full max-w-[320px] rounded-[1.5rem] overflow-hidden shadow-2xl relative z-10 transform scale-90 opacity-0 transition-all duration-300" id="qrModalContent">
-            
-            <div class="p-3 flex justify-between items-center border-b border-white/10">
-                <h3 id="qrTitle" class="font-bold text-base text-white ml-2 flex items-center gap-2">
-                    <i class="fas fa-qrcode text-amber-400"></i> QR Code
-                </h3>
-                <button onclick="closeQR()" class="w-7 h-7 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-red-500 hover:text-white transition-all duration-300">
-                    <i class="fas fa-times text-sm"></i>
+    <!-- QR Code Modal (ផ្ទាំងលោតឡើងសម្រាប់បង្ហាញ QR និង Share) -->
+    <div id="qrModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4 transition-opacity opacity-0" onclick="closeQRModal(event)">
+        <!-- ផ្ទាំង Modal ក៏មានភ្លើងរត់ដែរ (Optional: អាចដកចេញបានបើគិតថាច្រើនពេក) -->
+        <div class="animated-border-box max-w-sm w-full" onclick="event.stopPropagation()">
+            <div class="card-content bg-white rounded-[calc(1rem-2px)] p-6 relative">
+                <!-- ប៊ូតុងបិទ -->
+                <button onclick="closeQRModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-800 text-xl w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center transition-colors z-20">
+                    <i class="fas fa-times"></i>
                 </button>
-            </div>
-            
-            <div class="p-4 flex justify-center relative bg-white/5">
-                <div class="relative w-full aspect-square max-w-[220px] bg-white rounded-xl p-2 shadow-inner border border-white/50 flex items-center justify-center overflow-hidden">
-                    
-                    <div id="qrLoading" class="absolute inset-0 flex flex-col items-center justify-center text-blue-500 bg-white/80 backdrop-blur-sm z-20">
-                        <i class="fas fa-circle-notch fa-spin text-3xl mb-2"></i>
-                        <span class="text-[11px] font-medium text-gray-600 mt-2">កំពុងទាញយក...</span>
-                    </div>
-                    
-                    <img id="qrImage" src="" alt="QR Code" class="w-full h-full object-contain rounded-lg relative z-10" onload="document.getElementById('qrLoading').style.display='none'">
-                </div>
-            </div>
-            
-            <!-- Share & Download Section -->
-            <div class="p-4 text-center bg-black/30 flex flex-col gap-3">
-                <div class="flex items-center justify-center gap-2">
-                    <span class="text-[10px] font-bold bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full uppercase tracking-wider">USD</span>
-                    <span class="text-[10px] font-bold bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full uppercase tracking-wider">KHR</span>
+                
+                <h3 id="modalTitle" class="text-slate-800 font-bold text-xl text-center mb-4 border-b pb-2">QR Code</h3>
+                
+                <div class="bg-slate-100 rounded-xl p-2 mb-4 flex justify-center min-h-[250px] items-center relative group">
+                    <img id="modalQRImage" src="" alt="QR Code" crossorigin="anonymous" class="max-w-full max-h-[50vh] rounded-lg shadow-sm">
                 </div>
                 
-                <div class="flex items-center justify-center gap-2 mt-1">
-                    <button id="shareBtn" onclick="shareQR()" class="flex-1 bg-blue-500/90 hover:bg-blue-500 text-white text-[13px] font-medium py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg border border-blue-400/50">
-                        <i class="fas fa-share-nodes"></i> ចែករំលែក
-                    </button>
-                    <button id="downloadBtn" onclick="downloadQR()" class="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[13px] font-medium py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg">
+                <!-- ប៊ូតុងសកម្មភាព (Share / Download) -->
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <button onclick="downloadQR()" class="bg-slate-100 text-slate-700 py-2.5 rounded-xl font-medium hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
                         <i class="fas fa-download"></i> ទាញយក
                     </button>
+                    <button onclick="shareQR()" id="shareBtn" class="bg-blue-50 text-blue-600 py-2.5 rounded-xl font-medium hover:bg-blue-100 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-share-nodes"></i> ចែករំលែក
+                    </button>
                 </div>
+
+                <button onclick="closeQRModal()" class="w-full bg-slate-800 text-white py-3 rounded-xl font-medium hover:bg-slate-700 transition-colors">
+                    បិទផ្ទាំង
+                </button>
             </div>
         </div>
     </div>
 
-    <script>
-        // Store current QR details globally for Share/Download actions
-        let currentQRSrc = '';
-        let currentBankName = '';
+    <!-- Message Toast (សម្រាប់ការលោតប្រាប់) -->
+    <div id="toastMessage" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 opacity-0 translate-y-10 pointer-events-none z-[60] flex items-center gap-2">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastText">សារលោតឡើង</span>
+    </div>
 
-        function openQR(imgSrc, bankName) {
-            currentQRSrc = imgSrc;
-            currentBankName = bankName;
-            
-            const modal = document.getElementById('qrModal');
-            const backdrop = document.getElementById('qrBackdrop');
-            const modalContent = document.getElementById('qrModalContent');
-            const img = document.getElementById('qrImage');
-            const title = document.getElementById('qrTitle');
-            const loading = document.getElementById('qrLoading');
-            
-            modal.classList.remove('hidden');
-            
-            title.innerHTML = `<i class="fas fa-qrcode text-amber-400 mr-2"></i> ${bankName}`;
-            loading.style.display = 'flex';
-            img.src = imgSrc;
-            
-            requestAnimationFrame(() => {
-                backdrop.classList.remove('opacity-0');
-                backdrop.classList.add('opacity-100');
-                modalContent.classList.remove('scale-90', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100');
-            });
+    <!-- Scripts -->
+    <script>
+        // កំណត់ឆ្នាំស្វ័យប្រវត្តិ
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const modal = document.getElementById('qrModal');
+        const modalImg = document.getElementById('modalQRImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const shareBtn = document.getElementById('shareBtn');
+        
+        let currentBankName = '';
+        let currentQRUrl = '';
+
+        // ត្រួតពិនិត្យមើលថាតើ Browser គាំទ្រ Web Share API ដែរឬទេ
+        if (!navigator.share) {
+            shareBtn.style.display = 'none';
+            shareBtn.parentElement.classList.remove('grid-cols-2');
+            shareBtn.parentElement.classList.add('grid-cols-1');
         }
 
-        function closeQR() {
-            const modal = document.getElementById('qrModal');
-            const backdrop = document.getElementById('qrBackdrop');
-            const modalContent = document.getElementById('qrModalContent');
+        // អនុគមន៍បើកផ្ទាំង QR
+        function openQRModal(bankName, qrUrl) {
+            currentBankName = bankName;
+            currentQRUrl = qrUrl;
             
-            backdrop.classList.remove('opacity-100');
-            backdrop.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-90', 'opacity-0');
+            modalTitle.textContent = bankName + " QR";
+            
+            // បន្ថែមប៉ារ៉ាម៉ែត្រដើម្បីចៀសវាងបញ្ហា Cache នៅពេលទាញយករូបភាពពី Github
+            modalImg.src = qrUrl + '?v=' + new Date().getTime();
+            
+            // បង្ហាញ Modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // ប្រើ Timeout ដើម្បីឲ្យ Animation ដំណើរការ
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+            }, 10);
+        }
+
+        // អនុគមន៍បិទផ្ទាំង QR
+        function closeQRModal(e) {
+            // ការពារកុំឲ្យបិទពេលចុចលើតួ Modal (លើកលែងតែចុចខាងក្រៅ ឬចុចប៊ូតុង)
+            if(e && !e.target.classList.contains('bg-black/80') && !e.target.closest('button')) return; 
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
             
             setTimeout(() => {
                 modal.classList.add('hidden');
-                document.getElementById('qrImage').src = "";
+                modal.classList.remove('flex');
             }, 300);
         }
 
-        // Function to Share QR Code
-        async function shareQR() {
-            if (!currentQRSrc) return;
+        // អនុគមន៍បង្ហាញសារ Toast
+        function showToast(message) {
+            const toast = document.getElementById('toastMessage');
+            document.getElementById('toastText').textContent = message;
             
-            const shareBtn = document.getElementById('shareBtn');
-            const originalHTML = shareBtn.innerHTML;
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            toast.classList.add('opacity-100', 'translate-y-0');
             
-            try {
-                // Show loading state
-                shareBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> កំពុងរៀបចំ...';
-                
-                // Fetch image and convert to File object
-                const response = await fetch(currentQRSrc);
-                const blob = await response.blob();
-                const fileName = `${currentBankName.replace(/\s+/g, '_')}_QR.jpg`;
-                const file = new File([blob], fileName, { type: blob.type });
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-10');
+            }, 3000);
+        }
 
-                // Check if browser supports Web Share API with Files
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({
-                        title: `QR Code សម្រាប់ទូទាត់ - ${currentBankName}`,
-                        text: `សូមស្កេន QR Code នេះដើម្បីធ្វើការទូទាត់ប្រាក់ចូលគណនី ${currentBankName} របស់ខ្ញុំបាទ ហ៊ុន សំណាង។`,
-                        files: [file]
-                    });
-                } else if (navigator.share) {
-                    // Fallback: Share just the URL and Text if file sharing isn't supported
-                    await navigator.share({
-                        title: `QR Code សម្រាប់ទូទាត់ - ${currentBankName}`,
-                        text: `សូមស្កេន QR Code នេះដើម្បីធ្វើការទូទាត់ប្រាក់ចូលគណនី ${currentBankName} របស់ខ្ញុំបាទ ហ៊ុន សំណាង។`,
-                        url: currentQRSrc
-                    });
-                } else {
-                    alert('សុំទោស កម្មវិធីរុករករបស់អ្នកមិនគាំទ្រមុខងារចែករំលែកនេះទេ។ អ្នកអាចប្រើប៊ូតុង "ទាញយក" ជំនួសវិញ។');
-                }
+        // អនុគមន៍ទាញយក QR Code
+        async function downloadQR() {
+            try {
+                showToast("កំពុងរៀបចំទាញយក...");
+                
+                const response = await fetch(currentQRUrl);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = `QR_${currentBankName.replace(/\s+/g, '_')}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+                
+                showToast("បានទាញយករួចរាល់!");
             } catch (error) {
-                console.log('ការចែករំលែកត្រូវបានបោះបង់ ឬមានបញ្ហា:', error);
-            } finally {
-                // Restore button state
-                shareBtn.innerHTML = originalHTML;
+                console.error("Error downloading:", error);
+                
+                const a = document.createElement('a');
+                a.href = currentQRUrl;
+                a.download = `QR_${currentBankName.replace(/\s+/g, '_')}.jpg`;
+                a.target = '_blank';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
             }
         }
 
-        // Function to Download QR Code
-        async function downloadQR() {
-            if (!currentQRSrc) return;
-            
-            const downloadBtn = document.getElementById('downloadBtn');
-            const originalHTML = downloadBtn.innerHTML;
-            
+        // អនុគមន៍ចែករំលែក QR Code (Web Share API)
+        async function shareQR() {
             try {
-                downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> កំពុងទាញយក...';
+                try {
+                    const response = await fetch(currentQRUrl);
+                    const blob = await response.blob();
+                    const file = new File([blob], `QR_${currentBankName.replace(/\s+/g, '_')}.jpg`, { type: blob.type });
+                    
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            title: `QR Code សម្រាប់ ${currentBankName} - Hun Samnang`,
+                            text: `សូមស្កេន QR Code នេះសម្រាប់ការទូទាត់ទៅកាន់គណនី ${currentBankName} របស់ខ្ញុំ។`,
+                            files: [file]
+                        });
+                        return;
+                    }
+                } catch (imgError) {
+                    console.log("មិនអាច Share ជារូបភាពផ្ទាល់បានទេ នឹងប្តូរទៅ Share ជាតំណភ្ជាប់វិញ", imgError);
+                }
+
+                await navigator.share({
+                    title: `QR Code សម្រាប់ ${currentBankName} - Hun Samnang`,
+                    text: `នេះជាតំណភ្ជាប់សម្រាប់ស្កេន QR Code គណនី ${currentBankName} របស់ខ្ញុំ៖`,
+                    url: currentQRUrl
+                });
                 
-                const response = await fetch(currentQRSrc);
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = `HunSamnang_${currentBankName.replace(/\s+/g, '_')}_QR.jpg`;
-                
-                document.body.appendChild(a);
-                a.click();
-                
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
             } catch (error) {
-                console.error('បញ្ហាក្នុងការទាញយក:', error);
-                // Fallback for direct download link
-                window.open(currentQRSrc, '_blank');
-            } finally {
-                downloadBtn.innerHTML = originalHTML;
+                if (error.name !== 'AbortError') {
+                    showToast("មានបញ្ហាក្នុងការចែករំលែក");
+                    console.error('Error sharing:', error);
+                }
             }
         }
     </script>
@@ -401,3 +430,4 @@
 </html>
 
 
+```
