@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="km" class="dark">
+<html lang="km" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hun Samnang - Link in Bio</title>
+
+    <!-- Meta Tags សម្រាប់បង្ហាញរូបភាព និងព័ត៌មានពេលផ្ញើ Link (Social Share Preview) -->
+    <!-- សម្រាប់ Facebook, Telegram, WhatsApp, Discord, Slack និងកម្មវិធីជាច្រើនទៀត -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ហ៊ុន សំណាង - Hun Samnang | Link in Bio">
+    <meta property="og:description" content="សូមស្វាគមន៍មកកាន់ទំព័រផ្លូវការរបស់ខ្ញុំ! ទំនាក់ទំនង និងទូទាត់ប្រាក់បានរហ័សតាមរយៈតំណភ្ជាប់ធនាគារ និងបណ្តាញសង្គមផ្សេងៗនៅទីនេះ។">
+    <meta property="og:image" content="https://raw.githubusercontent.com/nanghtml/profile/refs/heads/main/profile.PNG">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- សម្រាប់ Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="ហ៊ុន សំណាង - Hun Samnang | Link in Bio">
+    <meta property="twitter:description" content="សូមស្វាគមន៍មកកាន់ទំព័រផ្លូវការរបស់ខ្ញុំ! ទំនាក់ទំនង និងទូទាត់ប្រាក់បានរហ័សនៅទីនេះ។">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/nanghtml/profile/refs/heads/main/profile.PNG">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for Icons -->
@@ -43,11 +59,11 @@
         }
         /* របៀប Light Mode */
         .light .glass-card {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(15, 23, 42, 0.08);
-            box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.05);
         }
         .btn-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,7 +87,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col items-center justify-between p-4 md:p-6 antialiased min-height-screen">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col items-center justify-between p-4 md:p-6 antialiased min-h-screen">
 
     <!-- របារឧបករណ៍ខាងលើ (Header Tools) -->
     <header class="w-full max-w-md mx-auto flex justify-between items-center py-2 z-10">
@@ -82,7 +98,6 @@
         
         <!-- ប៊ូតុងប្តូរ Light/Dark Mode -->
         <button onclick="toggleTheme()" id="theme-toggle-btn" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 transition-all shadow-sm" title="ប្តូរពន្លឺ">
-            <!-- បង្ហាញរូបព្រះអាទិត្យក្នុង Dark Mode និងរូបព្រះចន្ទក្នុង Light Mode -->
             <i class="fa-solid fa-sun text-lg dark:block hidden"></i>
             <i class="fa-solid fa-moon text-lg dark:hidden block"></i>
         </button>
@@ -95,7 +110,7 @@
         <div class="flex flex-col items-center text-center mt-4 mb-6 w-full">
             <div class="relative group">
                 <!-- រង្វង់ពន្លឺព័ទ្ធជុំវិញរូបថត -->
-                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur opacity-40 dark:opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur opacity-30 dark:opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                 <!-- រូបថតប្រវត្តិរូប -->
                 <img class="relative w-28 h-28 rounded-full border-4 border-white dark:border-slate-900 object-cover shadow-lg" 
                      src="https://raw.githubusercontent.com/nanghtml/profile/refs/heads/main/profile.PNG" 
@@ -352,19 +367,16 @@
             <!-- រូបភាព QR -->
             <div class="bg-white p-4 rounded-2xl inline-block shadow-inner mx-auto mb-4 relative overflow-hidden group border border-slate-100">
                 <img id="modalQRImg" src="" alt="QR Code" class="w-64 h-64 object-contain rounded-lg">
-                <!-- ស្រទាប់ overlay នៅពេល hover លើទូរស័ព្ទ / កុំព្យូទ័រ -->
                 <div class="absolute inset-0 bg-slate-950/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <span class="bg-black/70 text-white text-xs py-1 px-3 rounded-full font-khmer">ស្កែនដើម្បីទូទាត់</span>
                 </div>
             </div>
             
-            <!-- ប៊ូតុងបញ្ជាសម្រាប់ QR (Share / Download / Copy Link) -->
+            <!-- ប៊ូតុងបញ្ជាសម្រាប់ QR -->
             <div class="grid grid-cols-2 gap-2 mb-4">
-                <!-- ប៊ូតុង Share QR -->
                 <button onclick="shareQRLink()" class="btn-hover bg-cyan-600 hover:bg-cyan-500 text-white font-khmer text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
                     <i class="fa-solid fa-share-nodes"></i> ចែករំលែក QR
                 </button>
-                <!-- ប៊ូតុងទាញយករូបភាព QR -->
                 <button onclick="downloadQRImage()" class="btn-hover bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-khmer text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-slate-200 dark:border-slate-700 shadow-sm">
                     <i class="fa-solid fa-download"></i> ទាញយក QR
                 </button>
@@ -384,11 +396,9 @@
 
     <!-- ស្គ្រីបដំណើរការទំព័រ -->
     <script>
-        // អថេរសម្រាប់រក្សាទុកតំណភ្ជាប់រូបភាព QR បច្ចុប្បន្ន
         let currentQRUrl = "";
         let currentQRTitle = "";
 
-        // មុខងារប្តូរពន្លឺ Light / Dark Mode
         function toggleTheme() {
             const htmlElement = document.documentElement;
             if (htmlElement.classList.contains('dark')) {
@@ -402,25 +412,21 @@
             }
         }
 
-        // អានរចនាបថដែលបានរក្សាទុកចុងក្រោយ (ប្រសិនបើមាន)
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
-            } else {
+            if (savedTheme === 'dark') {
                 document.documentElement.classList.remove('light');
                 document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
             }
         });
 
-        // មុខងារប្តូរ Tabs
         function switchTab(tabName) {
-            // លាក់រាល់ Tabs ទាំងអស់
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.replace('block', 'hidden'));
 
-            // ប្តូរពណ៌ប៊ូតុងទាំងអស់ទៅសភាពដើម
             const buttons = [
                 { id: 'tab-payment', element: document.getElementById('tab-payment') },
                 { id: 'tab-social', element: document.getElementById('tab-social') },
@@ -431,16 +437,13 @@
                 btn.element.className = "flex-1 py-2.5 px-2 rounded-xl text-xs md:text-sm font-medium transition-all font-khmer text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50";
             });
 
-            // បង្ហាញ Tab ដែលបានជ្រើសរើស
             const activeContent = document.getElementById(`content-${tabName}`);
             activeContent.classList.replace('hidden', 'block');
 
-            // ប្តូរពណ៌ប៊ូតុងសកម្ម
             const activeButton = document.getElementById(`tab-${tabName}`);
             activeButton.className = "flex-1 py-2.5 px-2 rounded-xl text-xs md:text-sm font-medium transition-all font-khmer bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md";
         }
 
-        // មុខងារបើកផ្ទាំង Modal បង្ហាញ QR Code
         function openQRModal(title, imageUrl) {
             const modal = document.getElementById('qrModal');
             const modalCard = document.getElementById('modalCard');
@@ -452,7 +455,6 @@
             modalTitle.innerText = title;
             modalQRImg.src = imageUrl;
 
-            // បន្ថែម Fallback ប្រសិនបើរូបភាព QR Load មិនចេញ
             modalQRImg.onerror = function() {
                 this.src = "https://placehold.co/400x400/ffffff/0f172a?text=QR+Code+Unavailable";
             };
@@ -462,7 +464,6 @@
             modalCard.classList.add('scale-100');
         }
 
-        // មុខងារបិទផ្ទាំង QR Code
         function closeQRModal() {
             const modal = document.getElementById('qrModal');
             const modalCard = document.getElementById('modalCard');
@@ -472,18 +473,15 @@
             modalCard.classList.add('scale-95');
         }
 
-        // ចុចលើផ្ទៃខាងក្រៅ Modal ដើម្បីបិទ
         document.getElementById('qrModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeQRModal();
             }
         });
 
-        // មុខងារទាញយករូបភាព QR (Download)
         function downloadQRImage() {
             if (!currentQRUrl) return;
             
-            // បើករូបភាពក្នុង Tab ថ្មីដើម្បីងាយស្រួលរក្សាទុកលើគ្រប់ទូរស័ព្ទដៃ ឬទាញយកផ្ទាល់
             const link = document.createElement('a');
             link.href = currentQRUrl;
             link.target = '_blank';
@@ -495,7 +493,6 @@
             showToast("កំពុងបើករូបភាពដើម្បីរក្សាទុក...");
         }
 
-        // មុខងារចែករំលែកតំណភ្ជាប់ QR (Share)
         async function shareQRLink() {
             if (!currentQRUrl) return;
 
@@ -505,20 +502,15 @@
                 url: currentQRUrl
             };
 
-            // ពិនិត្យមើលថាតើឧបករណ៍គាំទ្រ Web Share API ដែរឬទេ (ភាគច្រើនគាំទ្រលើទូរស័ព្ទដៃ)
             if (navigator.share) {
                 try {
                     await navigator.share(shareData);
-                } catch (err) {
-                    // បើអ្នកប្រើប្រាស់បោះបង់ការ Share មិនបាច់បង្ហាញកំហុសទេ
-                }
+                } catch (err) {}
             } else {
-                // ប្រសិនបើមិនគាំទ្រ Web Share API ទេ គឺចម្លងតំណភ្ជាប់រូបភាពជំនួសវិញ
                 copyTextDirectly(currentQRUrl, `តំណភ្ជាប់ QR (${currentQRTitle})`);
             }
         }
 
-        // មុខងារចែករំលែកតំណភ្ជាប់ទំព័រទាំងមូល (Share Page)
         async function sharePage() {
             const pageUrl = window.location.href;
             const shareData = {
@@ -536,7 +528,6 @@
             }
         }
 
-        // មុខងារជំនួយសម្រាប់ចម្លងអត្ថបទ
         function copyTextDirectly(text, label) {
             const tempInput = document.createElement("input");
             tempInput.value = text;
@@ -548,12 +539,10 @@
             showToast(`បានចម្លង ${label} ជោគជ័យ!`);
         }
 
-        // មុខងារចម្លងលេខទូរស័ព្ទ (Clipboard)
         function copyToClipboard(text, name) {
             copyTextDirectly(text, `លេខទូរស័ព្ទ ${name}`);
         }
 
-        // មុខងារបង្ហាញសារជូនដំណឹង (Toast Message)
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
@@ -561,7 +550,6 @@
             toastMessage.innerText = message;
             toast.classList.remove('opacity-0', 'pointer-events-none');
             
-            // លាក់ទៅវិញក្រោយរយៈពេល 2.5 វិនាទី
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'pointer-events-none');
             }, 2500);
